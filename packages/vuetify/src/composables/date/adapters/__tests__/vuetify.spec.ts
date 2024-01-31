@@ -54,39 +54,17 @@ describe('vuetify date adapter', () => {
   })
 
   describe('isBeforeYear', () => {
-    let dateUtils: VuetifyDateAdapter
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' });
 
-    beforeEach(() => {
-      dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
-    })
-
-    it('returns false when the first date is in the same year as the second date', () => {
-      expect(dateUtils.isBeforeYear(new Date('2024-12-31'), new Date('2024-01-02'))).toBe(false)
-    })
-
-    it('returns false when dates are in the same year', () => {
-      expect(dateUtils.isBeforeYear(new Date('2024-12-31'), new Date('2024-12-31'))).toBe(false)
-    })
-
-    it('returns false when the first date is in a year after the second date', () => {
-      expect(dateUtils.isBeforeYear(new Date('2025-01-01'), new Date('2024-12-31'))).toBe(false)
-    })
-
-    describe('handles invalid dates', () => {
-      const validDate = new Date('2024-12-31')
-      const invalidDate = new Date('invalid-date')
-
-      it('returns false for invalid first date', () => {
-        expect(dateUtils.isBeforeYear(invalidDate, validDate)).toBe(false)
-      })
-
-      it('returns false for invalid second date', () => {
-        expect(dateUtils.isBeforeYear(validDate, invalidDate)).toBe(false)
-      })
-
-      it('returns false for both dates invalid', () => {
-        expect(dateUtils.isBeforeYear(invalidDate, invalidDate)).toBe(false)
-      })
-    })
-  })
+    it.each([
+      [new Date('2024-12-31'), new Date('2024-01-02'), false],
+      [new Date('2024-12-31'), new Date('2024-12-31'), false],
+      [new Date('2025-01-01'), new Date('2024-12-31'), false],
+      [new Date('invalid-date'), new Date('2024-12-31'), false],
+      [new Date('2024-12-31'), new Date('invalid-date'), false],
+      [new Date('invalid-date'), new Date('invalid-date'), false],
+    ])('returns %s when comparing %s and %s', (date1, date2, expected) => {
+      expect(dateUtils.isBeforeYear(date1, date2)).toBe(expected);
+    });
+  });
 })
