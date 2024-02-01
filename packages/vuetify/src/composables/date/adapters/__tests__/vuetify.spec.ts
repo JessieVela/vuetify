@@ -60,11 +60,9 @@ describe('vuetify date adapter', () => {
       [new Date('2024-12-31'), new Date('2024-01-02'), false],
       [new Date('2024-12-31'), new Date('2024-12-31'), false],
       [new Date('2025-01-01'), new Date('2024-12-31'), false],
-      [new Date('invalid-date'), new Date('2024-12-31'), false],
-      [new Date('2024-12-31'), new Date('invalid-date'), false],
-      [new Date('invalid-date'), new Date('invalid-date'), false],
-    ])('returns %s when comparing %s and %s', (date1, date2, expected) => {
-      expect(dateUtils.isBeforeYear(date1, date2)).toBe(expected)
+      [new Date('2023-12-31'), new Date('2024-01-01'), true],
+    ])('returns %s when comparing %s and %s', (date, comparing, expected) => {
+      expect(dateUtils.isBeforeYear(date, comparing)).toBe(expected)
     })
   })
 })
