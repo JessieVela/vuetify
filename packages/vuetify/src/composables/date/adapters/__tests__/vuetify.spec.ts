@@ -54,7 +54,7 @@ describe('vuetify date adapter', () => {
   })
 
   describe('isBeforeYear', () => {
-    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' });
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
 
     it.each([
       [new Date('2024-12-31'), new Date('2024-01-02'), false],
@@ -64,7 +64,7 @@ describe('vuetify date adapter', () => {
       [new Date('2024-12-31'), new Date('invalid-date'), false],
       [new Date('invalid-date'), new Date('invalid-date'), false],
     ])('returns %s when comparing %s and %s', (date1, date2, expected) => {
-      expect(dateUtils.isBeforeYear(date1, date2)).toBe(expected);
-    });
-  });
+      expect(dateUtils.isBeforeYear(date1, date2)).toBe(expected)
+    })
+  })
 })
