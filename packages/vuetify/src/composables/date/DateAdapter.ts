@@ -42,6 +42,9 @@ export interface DateAdapter<T = unknown> {
   setMonth (date: T, month: number): T
   getNextMonth (date: T): T
   getPreviousMonth(date: T): T
+
+  getMonthArray(date: T): T[]
+
   getHours (date: T): number
   setHours (date: T, hours: number): T
   getMinutes (date: T): number

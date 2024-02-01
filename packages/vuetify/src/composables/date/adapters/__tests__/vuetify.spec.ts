@@ -115,11 +115,28 @@ describe('vuetify date adapter', () => {
       [new Date('2025-01-31'), new Date('2024-12-01'), '2025-01-31 -> 2024-12-01'],
       [new Date('2024-02-29'), new Date('2024-01-01'), '2024-02-29 -> 2024-01-01 (Leap Year)'],
       [new Date('2023-03-01'), new Date('2023-02-01'), '2023-03-01 -> 2023-02-01'],
-    ])('correctly calculates the first day of the previous month: %s', (date, expected, description) => {
+    ])('correctly calculates the first day of the previous month: %s', (date, expected) => {
       const result = dateUtils.getPreviousMonth(date)
       expect(result.getFullYear()).toBe(expected.getFullYear())
       expect(result.getMonth()).toBe(expected.getMonth())
       expect(result.getDate()).toBe(expected.getDate())
+    })
+  })
+
+  describe('getMonthArray', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date(2024, 0, 15), 31],
+      [new Date(2023, 8, 10), 30],
+      [new Date(2024, 1, 10), 29],
+      [new Date(2023, 1, 10), 28],
+
+    ])('generates an array for the month of the given date (%s)', (testDate, expectedDays) => {
+      const result = dateUtils.getMonthArray(testDate)
+      expect(result).toHaveLength(expectedDays)
+      expect(result[0]).toEqual(new Date(testDate.getFullYear(), testDate.getMonth(), 1))
+      expect(result[expectedDays - 1]).toEqual(new Date(testDate.getFullYear(), testDate.getMonth(), expectedDays))
     })
   })
 })
