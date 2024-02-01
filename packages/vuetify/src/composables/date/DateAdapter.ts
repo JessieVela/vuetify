@@ -19,10 +19,13 @@ export interface DateAdapter<T = unknown> {
   isAfterMonth(value: T, comparing: T): boolean
   isAfterYear(value: T, comparing: T): boolean
 
-  isBefore (date: T, comparing: T): boolean
-  isEqual (date: T, comparing: T): boolean
+  isSameHour(value: T, comparing: T): boolean
   isSameDay (date: T, comparing: T): boolean
   isSameMonth (date: T, comparing: T): boolean
+  isSameYear(value: T, comparing: T): boolean
+
+  isBefore (date: T, comparing: T): boolean
+  isEqual (date: T, comparing: T): boolean
   isBeforeYear (date: T, comparing: T): boolean
   isValid (date: any): boolean
   isWithinRange (date: T, range: [T, T]): boolean
@@ -44,7 +47,6 @@ export interface DateAdapter<T = unknown> {
   getPreviousMonth(date: T): T
 
   getMonthArray(date: T): T[]
-
   getHours (date: T): number
   setHours (date: T, hours: number): T
   getMinutes (date: T): number

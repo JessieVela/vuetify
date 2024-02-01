@@ -446,6 +446,13 @@ function isEqual (date: Date, comparing: Date) {
   return date.getTime() === comparing.getTime()
 }
 
+function isSameHour (date: Date, comparing: Date) {
+  return date.getHours() === comparing.getHours() &&
+    date.getDate() === comparing.getDate() &&
+    date.getMonth() === comparing.getMonth() &&
+    date.getFullYear() === comparing.getFullYear()
+}
+
 function isSameDay (date: Date, comparing: Date) {
   return date.getDate() === comparing.getDate() &&
     date.getMonth() === comparing.getMonth() &&
@@ -455,6 +462,10 @@ function isSameDay (date: Date, comparing: Date) {
 function isSameMonth (date: Date, comparing: Date) {
   return date.getMonth() === comparing.getMonth() &&
     date.getFullYear() === comparing.getFullYear()
+}
+
+function isSameYear (date: Date, comparing: Date) {
+  return date.getFullYear() === comparing.getFullYear()
 }
 
 function isBeforeYear (date: Date, comparing: Date) {
@@ -609,12 +620,20 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return isBeforeYear(date, comparing)
   }
 
+  isSameHour (date: Date, comparing: Date) {
+    return isSameHour(date, comparing)
+  }
+
   isSameDay (date: Date, comparing: Date) {
     return isSameDay(date, comparing)
   }
 
   isSameMonth (date: Date, comparing: Date) {
     return isSameMonth(date, comparing)
+  }
+
+  isSameYear (date: Date, comparing: Date) {
+    return isSameYear(date, comparing)
   }
 
   setMinutes (date: Date, count: number) {

@@ -139,4 +139,32 @@ describe('vuetify date adapter', () => {
       expect(result[expectedDays - 1]).toEqual(new Date(testDate.getFullYear(), testDate.getMonth(), expectedDays))
     })
   })
+
+  describe('isSameHour', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2024-01-01T08:00:00'), new Date('2024-01-01T08:30:00'), true],
+      [new Date('2024-01-01T00:00:00'), new Date('2024-01-01T00:00:00'), true],
+      [new Date('2024-01-01T08:00:00'), new Date('2024-01-01T09:00:00'), false],
+      [new Date('2024-01-01T23:59:59'), new Date('2024-01-02T00:00:00'), false],
+      [new Date('2024-01-01T08:00:00'), new Date('2023-01-01T08:00:00'), false],
+    ])('returns %s when comparing %s and %s', (date1, date2, expected) => {
+      expect(dateUtils.isSameHour(date1, date2)).toBe(expected)
+    })
+  })
+
+  describe('isSameYear', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2024-01-01'), new Date('2024-12-31'), true],
+      [new Date('2024-06-15'), new Date('2024-11-20'), true],
+      [new Date('2023-01-01'), new Date('2024-01-01'), false],
+      [new Date('2024-12-31'), new Date('2025-01-01'), false],
+      [new Date('2024-07-07'), new Date('2023-07-07'), false],
+    ])('returns %s when comparing %s and %s', (date1, date2, expected) => {
+      expect(dateUtils.isSameYear(date1, date2)).toBe(expected)
+    })
+  })
 })
