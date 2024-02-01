@@ -57,12 +57,52 @@ describe('vuetify date adapter', () => {
     const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
 
     it.each([
+      [new Date('2023-12-31'), new Date('2024-01-01'), true],
       [new Date('2024-12-31'), new Date('2024-01-02'), false],
       [new Date('2024-12-31'), new Date('2024-12-31'), false],
       [new Date('2025-01-01'), new Date('2024-12-31'), false],
-      [new Date('2023-12-31'), new Date('2024-01-01'), true],
     ])('returns %s when comparing %s and %s', (date, comparing, expected) => {
       expect(dateUtils.isBeforeYear(date, comparing)).toBe(expected)
+    })
+  })
+
+  describe('isAfterDay', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2024-01-02'), new Date('2024-01-01'), true],
+      [new Date('2024-02-29'), new Date('2024-02-28'), true],
+      [new Date('2024-01-01'), new Date('2024-01-01'), false],
+      [new Date('2024-01-01'), new Date('2024-01-02'), false],
+    ])('returns %s when comparing %s and %s', (date, comparing, expected) => {
+      expect(dateUtils.isAfterDay(date, comparing)).toBe(expected)
+    })
+  })
+
+  describe('isAfterMonth', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2024-02-01'), new Date('2024-01-01'), true],
+      [new Date('2024-03-01'), new Date('2024-02-29'), true],
+      [new Date('2024-01-02'), new Date('2024-01-01'), false],
+      [new Date('2024-01-01'), new Date('2024-01-01'), false],
+      [new Date('2024-01-01'), new Date('2024-02-01'), false],
+    ])('returns %s when comparing %s and %s', (date, comparing, expected) => {
+      expect(dateUtils.isAfterMonth(date, comparing)).toBe(expected)
+    })
+  })
+
+  describe('isAfterYear', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2025-01-01'), new Date('2024-01-01'), true],
+      [new Date('2024-02-29'), new Date('2023-02-28'), true],
+      [new Date('2024-01-01'), new Date('2024-01-01'), false],
+      [new Date('2024-02-01'), new Date('2024-01-01'), false],
+    ])('returns %s when comparing %s and %s', (date, comparing, expected) => {
+      expect(dateUtils.isAfterYear(date, comparing)).toBe(expected)
     })
   })
 })

@@ -14,8 +14,12 @@ export interface DateAdapter<T = unknown> {
   startOfYear (date: T): T
   endOfYear (date: T): T
 
-  isBefore (date: T, comparing: T): boolean
   isAfter (date: T, comparing: T): boolean
+  isAfterDay(value: T, comparing: T): boolean
+  isAfterMonth(value: T, comparing: T): boolean
+  isAfterYear(value: T, comparing: T): boolean
+
+  isBefore (date: T, comparing: T): boolean
   isEqual (date: T, comparing: T): boolean
   isSameDay (date: T, comparing: T): boolean
   isSameMonth (date: T, comparing: T): boolean

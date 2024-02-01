@@ -408,6 +408,18 @@ function isAfter (date: Date, comparing: Date) {
   return date.getTime() > comparing.getTime()
 }
 
+function isAfterDay (date: Date, comparing: Date): boolean {
+  return isAfter(startOfDay(date), startOfDay(comparing))
+}
+
+function isAfterMonth (date: Date, comparing: Date) {
+  return isAfter(startOfMonth(date), startOfMonth(comparing))
+}
+
+function isAfterYear (date: Date, comparing: Date) {
+  return isAfter(startOfYear(date), startOfYear(comparing))
+}
+
 function isBefore (date: Date, comparing: Date) {
   return date.getTime() < comparing.getTime()
 }
@@ -557,6 +569,18 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   isAfter (date: Date, comparing: Date) {
     return isAfter(date, comparing)
+  }
+
+  isAfterDay (date: Date, comparing: Date) {
+    return isAfterDay(date, comparing)
+  }
+
+  isAfterMonth (date: Date, comparing: Date) {
+    return isAfterMonth(date, comparing)
+  }
+
+  isAfterYear (date: Date, comparing: Date) {
+    return isAfterYear(date, comparing)
   }
 
   isBefore (date: Date, comparing: Date) {
