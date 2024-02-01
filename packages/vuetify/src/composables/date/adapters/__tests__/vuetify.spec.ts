@@ -105,4 +105,21 @@ describe('vuetify date adapter', () => {
       expect(dateUtils.isAfterYear(date, comparing)).toBe(expected)
     })
   })
+
+  describe('getPreviousMonth', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2024-03-15'), new Date('2024-02-01'), '2024-03-15 -> 2024-02-01'],
+      [new Date('2024-01-01'), new Date('2023-12-01'), '2024-01-01 -> 2023-12-01'],
+      [new Date('2025-01-31'), new Date('2024-12-01'), '2025-01-31 -> 2024-12-01'],
+      [new Date('2024-02-29'), new Date('2024-01-01'), '2024-02-29 -> 2024-01-01 (Leap Year)'],
+      [new Date('2023-03-01'), new Date('2023-02-01'), '2023-03-01 -> 2023-02-01'],
+    ])('correctly calculates the first day of the previous month: %s', (date, expected, description) => {
+      const result = dateUtils.getPreviousMonth(date)
+      expect(result.getFullYear()).toBe(expected.getFullYear())
+      expect(result.getMonth()).toBe(expected.getMonth())
+      expect(result.getDate()).toBe(expected.getDate())
+    })
+  })
 })

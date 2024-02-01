@@ -379,6 +379,10 @@ function getNextMonth (date: Date) {
   return new Date(date.getFullYear(), date.getMonth() + 1, 1)
 }
 
+function getPreviousMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() - 1, 1)
+}
+
 function getHours (date: Date) {
   return date.getHours()
 }
@@ -633,6 +637,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
 
   getNextMonth (date: Date) {
     return getNextMonth(date)
+  }
+
+  getPreviousMonth (date: Date) {
+    return getPreviousMonth(date)
   }
 
   getHours (date: Date) {
