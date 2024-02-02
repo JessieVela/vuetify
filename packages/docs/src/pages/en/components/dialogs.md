@@ -49,9 +49,9 @@ In addition using the **activator** slot, we can instead use the **activator** p
 
 <example file="v-dialog/prop-activator" />
 
-### v-model
+### model-value
 
-You can also trigger a dialog by simply updating the v-model, without using either **activator** slot or prop. In this case, the dialog will not appear to be activated by any specific element, and will simply appear in the middle of the screen.
+You can also trigger a dialog by simply updating the model-value, without using either **activator** slot or prop. In this case, the dialog will not appear to be activated by any specific element, and will simply appear in the middle of the screen.
 
 <example file="v-dialog/prop-model" />
 
